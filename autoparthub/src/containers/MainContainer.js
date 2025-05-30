@@ -122,11 +122,15 @@ function MainContainer() {
           minHeight: "86vh"
         }}
       >
-        <SidebarFilter
-          filter={filter}
-          onFilterChange={handleFilterChange}
-          partTypes={partTypes}
-        />
+        <div style={{ display: "flex", flexDirection: "column", gap: "18px", minWidth: 260, maxWidth: 325 }}>
+          <SidebarFilter
+            filter={filter}
+            onFilterChange={handleFilterChange}
+            partTypes={partTypes}
+          />
+          {/* App-level Customer Review Section */}
+          <CustomerReviewSection />
+        </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           {/* Pass addToCart to ProductGrid/ProductCard */}
           <ProductGrid
