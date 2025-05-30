@@ -28,6 +28,11 @@ function MainContainer() {
     maxPrice: ''
   });
 
+  // PUBLIC_INTERFACE
+  // Cart state: array of {name, image, price, description, quantity}
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
+
   // Handler for clicking a part: open modal with selected details
   const handlePartClick = (part) => setSelectedPart(part);
 
@@ -62,9 +67,51 @@ function MainContainer() {
     return typeOk && priceOk;
   });
 
+  // PUBLIC_INTERFACE
+  // Add a part to cart (by name: increases quantity if already present)
+  const handleAddToCart = (item) => {
+    setCart((prev) => {
+      const idx = prev.findIndex((p) => p.name === item.name);
+      if (idx !== -1) {
+        // Already present: increment quantity
+        return prev.map((p, i) =>
+          i === idx ? { ...p, quantity: (p.quantity || 1) + 1 } : p
+        );
+      }
+      // New item
+      return [...prev, { ...item, quantity: 1 }];
+    });
+  };
+
+  // PUBLIC_INTERFACE
+  // Remove one quantity (or remove item entirely) from cart
+  const handleRemoveFromCart = (itemName) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.name === itemName
+            ? { ...item, quantity: (item.quantity || 1) - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  // PUBLIC_INTERFACE
+  // Remove entire item from cart
+  const handleRemoveItemCompletely = (itemName) => {
+    setCart((prev) =>
+      prev.filter((item) => item.name !== itemName)
+    );
+  };
+
+  const openCart = () => setCartOpen(true);
+  const closeCart = () => setCartOpen(false);
+
   return (
     <div>
-      <NavigationBar />
+      {/* Pass openCart to NavigationBar */}
+      <NavigationBar onCartClick={openCart} cartCount={cart.reduce((sum, p) => sum + (p.quantity || 1), 0)} />
       <div
         className="main-content"
         style={{
@@ -80,11 +127,29 @@ function MainContainer() {
           partTypes={partTypes}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <ProductGrid parts={filteredParts} onPartClick={handlePartClick} />
+          {/* Pass addToCart to ProductGrid/ProductCard */}
+          <ProductGrid
+            parts={filteredParts}
+            onPartClick={handlePartClick}
+            onAddToCart={handleAddToCart}
+          />
 
-          {/* Other features below */}
-          <ShoppingCart />
-          <ProductDetailModal part={selectedPart} onClose={handleModalClose} />
+          {/* Cart modal/panel */}
+          <ShoppingCart
+            isOpen={cartOpen}
+            onClose={closeCart}
+            cart={cart}
+            onRemove={handleRemoveFromCart}
+            onRemoveItemCompletely={handleRemoveItemCompletely}
+          />
+
+          {/* Product details with addToCart */}
+          <ProductDetailModal
+            part={selectedPart}
+            onClose={handleModalClose}
+            onAddToCart={handleAddToCart}
+          />
+
           <Checkout />
           <OrderTracking />
           <UserAccount />
