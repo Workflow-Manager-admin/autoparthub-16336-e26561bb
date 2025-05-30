@@ -27,23 +27,50 @@ function ProductDetailModal({ part, onClose, onAddToCart }) {
         minWidth: 290,
         padding: '8px 8px 22px 8px'
       }}>
-        <img
-          src={image || placeholder}
-          alt={name}
-          style={{
-            width: 160,
-            height: 160,
-            objectFit: 'contain',
-            background: '#f3f6f9',
-            borderRadius: 9,
-            marginBottom: 18,
-            border: '1px solid #ececec'
-          }}
-          onError={e => {
-            e.target.onerror = null;
-            e.target.src = placeholder;
-          }}
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            style={{
+              width: 160,
+              height: 160,
+              objectFit: 'contain',
+              background: '#f3f6f9',
+              borderRadius: 9,
+              marginBottom: 18,
+              border: '1px solid #ececec'
+            }}
+            onError={e => {
+              e.target.onerror = null;
+              e.target.src = placeholder;
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              width: 160,
+              height: 160,
+              background: '#e0e0e0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              borderRadius: '9px',
+              margin: '0 auto 18px auto',
+              border: '1px solid #dadada',
+              userSelect: 'none'
+            }}
+            aria-label="No image available"
+            data-testid="product-detail-modal-image-placeholder"
+          >
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true" style={{ marginBottom: 5 }}>
+              <rect x="6" y="15" width="48" height="30" rx="9" fill="#bbbbbb" />
+              <circle cx="23" cy="30" r="8" fill="#dedede" />
+              <rect x="32" y="26" width="17" height="13" rx="4" fill="#dedede" />
+            </svg>
+            <span style={{ color: '#969696', marginTop: 2, fontSize: 15, fontWeight: 500 }}>No Image Available</span>
+          </div>
+        )}
         <h2 style={{ marginBottom: 6 }}>{name}</h2>
         <div
           style={{
