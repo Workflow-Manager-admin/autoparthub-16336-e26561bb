@@ -15,6 +15,8 @@ function ProductGrid({ parts = [], onPartClick }) {
               key={part.name + idx}
               name={part.name}
               image={part.image}
+              price={part.price}
+              description={part.description}
               onClick={() => {
                 // Pass full part object to onPartClick, if provided
                 if (typeof onPartClick === 'function') onPartClick(part);
