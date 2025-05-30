@@ -1,1 +1,20 @@
 /* ProductDetailModal styles */
+
+.product-detail-modal-content {
+  /* Example: can be further customized */
+  text-align: center;
+}
+
+.product-detail-modal-price {
+  color: var(--kavia-orange, #e87a41);
+  font-weight: 700;
+  font-size: 1.14rem;
+  margin-bottom: 7px;
+}
+
+.product-detail-modal-description {
+  font-size: 1.04rem;
+  color: #343432;
+  margin-bottom: 18px;
+}
+
