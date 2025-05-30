@@ -6,12 +6,19 @@ import Modal from '../Modal/Modal';
  * ProductDetailModal - displays full details of the selected part in a modal.
  * @param {Object} part - The selected part object (expects name, image, etc)
  * @param {Function} onClose - function to close the modal
+ * @param {Function} onAddToCart - optional: add this part to cart
  */
-function ProductDetailModal({ part, onClose }) {
+function ProductDetailModal({ part, onClose, onAddToCart }) {
   if (!part) return null;
 
   const { name, image, price, description } = part;
   const placeholder = 'https://via.placeholder.com/160x160?text=No+Image';
+
+  const handleAddToCart = () => {
+    if (typeof onAddToCart === 'function') {
+      onAddToCart(part);
+    }
+  };
 
   return (
     <Modal isOpen={!!part} onClose={onClose}>
@@ -64,6 +71,16 @@ function ProductDetailModal({ part, onClose }) {
         <div style={{ color: '#757575', fontSize: '0.99rem', marginBottom: '18px' }}>
           <em>More specifications and compatibility info coming soon.</em>
         </div>
+        {onAddToCart && (
+          <button
+            className="btn"
+            type="button"
+            onClick={handleAddToCart}
+            style={{ marginBottom: 14, minWidth: 120, fontSize: '1.04rem' }}
+          >
+            Add to Cart
+          </button>
+        )}
         <button className="btn" type="button" onClick={onClose} style={{ marginTop: 8 }}>
           Close
         </button>
