@@ -58,11 +58,40 @@
   transition: background 0.1s;
 }
 
+.product-card-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .product-card-name {
   font-size: 1.08rem;
   font-weight: 600;
   color: #212121;
+  margin-bottom: 3px;
   text-align: center;
+}
+
+.product-card-price {
+  color: var(--kavia-orange, #e87a41);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  margin-top: 0;
+  letter-spacing: 0.01em;
+}
+
+.product-card-description {
+  font-size: 0.97rem;
+  color: var(--text-secondary, #757575);
+  text-align: center;
+  min-height: 42px;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-grid-empty {
