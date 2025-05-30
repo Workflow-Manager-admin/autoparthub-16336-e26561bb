@@ -10,21 +10,24 @@ import UserAccount from '../components/UserAccount/UserAccount';
 import Loader from '../components/Loader/Loader';
 import Modal from '../components/Modal/Modal';
 
+import './MainContainer.css';
 // PUBLIC_INTERFACE
 function MainContainer() {
   // TODO: Manage layout/routing, global app state, and feature composition
   return (
     <div>
       <NavigationBar />
-      <SidebarFilter />
-      <ProductGrid />
-      <ShoppingCart />
-      <ProductDetailModal />
-      <Checkout />
-      <OrderTracking />
-      <UserAccount />
-      <Loader />
-      <Modal isOpen={false}></Modal>
+      <div className="main-content">
+        <SidebarFilter />
+        <ProductGrid />
+        <ShoppingCart />
+        <ProductDetailModal />
+        <Checkout />
+        <OrderTracking />
+        <UserAccount />
+        <Loader />
+        <Modal isOpen={false}></Modal>
+      </div>
     </div>
   );
 }
