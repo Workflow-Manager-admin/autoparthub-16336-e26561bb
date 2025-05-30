@@ -37,12 +37,44 @@ function ProductCard({ name, image, price, description, onClick, onAddToCart }) 
       aria-label={`View details for ${name}`}
     >
       <div className="product-card-image-wrap">
-        <img
-          src={image || placeholder}
-          alt={name}
-          className="product-card-image"
-          onError={(e) => { e.target.onerror = null; e.target.src = placeholder; }}
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            className="product-card-image"
+            onError={(e) => { e.target.onerror = null; e.target.src = placeholder; }}
+          />
+        ) : (
+          // Placeholder: gray box with icon & "No Image"
+          <div
+            style={{
+              width: 112,
+              height: 112,
+              background: '#e0e0e0',
+              borderRadius: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#bdbdbd',
+              fontSize: 22,
+              fontWeight: 600,
+              textAlign: 'center',
+              position: 'relative',
+              border: '1px solid #dadada',
+              userSelect: 'none'
+            }}
+            aria-label="No image available"
+            data-testid="product-card-image-placeholder"
+          >
+            <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true" style={{ marginBottom: 5 }}>
+              <rect x="4" y="8" width="28" height="20" rx="5" fill="#bbbbbb" />
+              <circle cx="13" cy="18" r="3.5" fill="#dedede" />
+              <rect x="17" y="15" width="10" height="7" rx="2" fill="#dedede" />
+            </svg>
+            <span style={{ fontSize: 13, color: '#969696' }}>No Image</span>
+          </div>
+        )}
       </div>
       <div className="product-card-details">
         <div className="product-card-name">{name}</div>
