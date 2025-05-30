@@ -1,18 +1,25 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 
-// PUBLIC_INTERFACE
-function ProductGrid({ parts = [] }) {
-  /**
-   * Renders a grid of car part cards.
-   * @param {Array} parts - array of car part objects with { name, image }
-   */
+/**
+ * PUBLIC_INTERFACE
+ * ProductGrid: renders a grid of ProductCards with click support.
+ */
+function ProductGrid({ parts = [], onPartClick }) {
   return (
     <section className="product-grid" aria-label="Spare Parts">
       {parts && parts.length > 0 ? (
         <div className="product-grid-list">
           {parts.map((part, idx) =>
-            <ProductCard key={part.name + idx} name={part.name} image={part.image} />
+            <ProductCard
+              key={part.name + idx}
+              name={part.name}
+              image={part.image}
+              onClick={() => {
+                // Pass full part object to onPartClick, if provided
+                if (typeof onPartClick === 'function') onPartClick(part);
+              }}
+            />
           )}
         </div>
       ) : (
