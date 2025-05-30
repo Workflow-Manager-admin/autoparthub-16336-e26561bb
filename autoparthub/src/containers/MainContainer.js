@@ -10,6 +10,7 @@ import OrderTracking from '../components/OrderTracking/OrderTracking';
 import UserAccount from '../components/UserAccount/UserAccount';
 import Loader from '../components/Loader/Loader';
 import Modal from '../components/Modal/Modal';
+import CustomerReviewSection from '../components/CustomerReviewSection/CustomerReviewSection';
 
 import './MainContainer.css';
 
