@@ -2,17 +2,24 @@ import React from 'react';
 
 /**
  * PUBLIC_INTERFACE
- * ProductCard: displays a car part card and calls onClick with part data when clicked.
- * Now supports price and description display.
+ * ProductCard: displays a car part card, calls onClick with part data when clicked.
+ * Now supports price and description display, and optional add-to-cart action.
  */
-function ProductCard({ name, image, price, description, onClick }) {
+function ProductCard({ name, image, price, description, onClick, onAddToCart }) {
   const placeholder =
     'https://via.placeholder.com/120x120?text=No+Image';
 
   const handleClick = () => {
-    // If click handler is provided, call it with part data.
+    // If click handler is provided, call it with part data (view details).
     if (typeof onClick === 'function') {
       onClick({ name, image, price, description });
+    }
+  };
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation(); // Prevent card 'open details'
+    if (typeof onAddToCart === 'function') {
+      onAddToCart({ name, image, price, description });
     }
   };
 
@@ -41,6 +48,18 @@ function ProductCard({ name, image, price, description, onClick }) {
         <div className="product-card-name">{name}</div>
         <div className="product-card-price">${price != null ? price.toFixed(2) : '—'}</div>
         <div className="product-card-description">{description}</div>
+        {/* Add to Cart button */}
+        {onAddToCart && (
+          <button
+            className="btn"
+            type="button"
+            style={{ marginTop: 10, width: '96%', fontSize: '0.98rem' }}
+            onClick={handleAddToCart}
+            tabIndex={0}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );
