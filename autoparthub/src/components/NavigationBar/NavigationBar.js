@@ -7,14 +7,14 @@ function NavigationBar() {
    * NavigationBar renders the main navigation for the app, featuring:
    *  - Logo section (left)
    *  - Centered search bar
+   *  - Favorites/Liked Parts subdivision (right, before user/cart)
    *  - User account and shopping cart icons (right)
-   * Styling ensures visible separation and alignment, using a dark background.
+   * Designed for extensibility—extra nav sections/links can be added easily.
    */
   return (
     <nav className="navbar navbar-ap-nav" role="navigation" aria-label="Primary Navigation">
       {/* Left Section: Logo */}
       <div className="navbar-section navbar-logo" tabIndex={0} aria-label="AutoPartHub Home">
-        {/* Placeholder SVG logo (car) */}
         <span className="logo-symbol" aria-hidden="true">
           {/* Inline SVG, automotive theme */}
           <svg width="28" height="24" viewBox="0 0 28 24" fill="none" aria-hidden="true">
@@ -33,6 +33,22 @@ function NavigationBar() {
           placeholder="Search for parts, models, or brands"
           aria-label="Search"
         />
+      </div>
+
+      {/* Favorites Section (Future extensibility: Insert more nav links here) */}
+      <div className="navbar-section navbar-favorites" title="Liked Parts / Favorites">
+        <button className="navbar-icon-btn" aria-label="Liked Parts" tabIndex={0}>
+          {/* Heart (favorite) icon, suitable for 'Liked Parts' or 'Favorites' */}
+          <svg viewBox="0 0 26 24" width="24" height="24" fill="none" aria-hidden="true">
+            <path
+              d="M13 21s-7.5-6.24-9.47-8.34C1.4 10.79 0.5 9.34 0.5 7.69 0.5 4.44 3.24 1.5 6.62 1.5c1.89 0 3.34 1.12 4.38 2.38C11.65 2.62 13.1 1.5 14.99 1.5 18.37 1.5 21.11 4.44 21.11 7.69c0 1.65-.89 3.1-3.03 4.97C20.5 14.76 13 21 13 21z"
+              stroke="#fff"
+              strokeWidth="1.6"
+              fill="#E87A41"
+              fillOpacity="0.78"
+            />
+          </svg>
+        </button>
       </div>
 
       {/* Right Section: Actions */}
