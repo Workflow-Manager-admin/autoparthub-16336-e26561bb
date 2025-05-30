@@ -2,7 +2,7 @@ import React from 'react';
 import './NavigationBar.css';
 
 // PUBLIC_INTERFACE
-function NavigationBar() {
+function NavigationBar({ onCartClick, cartCount }) {
   /**
    * NavigationBar renders the main navigation for the app, featuring:
    *  - Logo section (left)
@@ -62,7 +62,13 @@ function NavigationBar() {
           </svg>
         </button>
         {/* Shopping Cart Icon */}
-        <button className="navbar-icon-btn" aria-label="Shopping cart" title="Shopping Cart">
+        <button
+          className="navbar-icon-btn"
+          aria-label="Shopping cart"
+          title="Shopping Cart"
+          onClick={typeof onCartClick === 'function' ? onCartClick : undefined}
+          style={{ position: 'relative' }}
+        >
           {/* SVG cart */}
           <svg viewBox="0 0 28 28" width="24" height="24" fill="none" aria-hidden="true">
             <rect x="6" y="8" width="16" height="10" rx="2" fill="#fff" fillOpacity="0.11"/>
@@ -70,6 +76,32 @@ function NavigationBar() {
             <circle cx="10" cy="20" r="1.7" fill="#fff"/>
             <circle cx="18" cy="20" r="1.7" fill="#fff"/>
           </svg>
+          {cartCount > 0 && (
+            <span
+              style={{
+                position: 'absolute',
+                top: 7,
+                right: 3,
+                background: '#E87A41',
+                color: '#fff',
+                borderRadius: '50%',
+                fontSize: '0.88rem',
+                fontWeight: 700,
+                minWidth: 19,
+                height: 19,
+                lineHeight: '19px',
+                textAlign: 'center',
+                border: '1.5px solid #fff',
+                boxShadow: '0 1px 3px 0 rgba(0,0,0,0.13)',
+                padding: '0 4px',
+                pointerEvents: 'none',
+                zIndex: 2
+              }}
+              aria-label={`${cartCount} items in cart`}
+            >
+              {cartCount}
+            </span>
+          )}
         </button>
       </div>
     </nav>
