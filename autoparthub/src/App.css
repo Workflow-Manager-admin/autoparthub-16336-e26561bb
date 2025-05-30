@@ -1,9 +1,11 @@
 :root {
   --kavia-orange: #E87A41;
   --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --kavia-light: #FAFAFA;
+  --content-bg: #F5F6F8;
+  --text-color: #212121;
+  --text-secondary: #757575;
+  --border-color: #DADADA;
 }
 
 body {
