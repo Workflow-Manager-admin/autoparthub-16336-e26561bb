@@ -4,7 +4,7 @@
   min-height: 64px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   position: fixed;
   top: 0;
@@ -30,6 +30,8 @@
   min-width: 170px;
   user-select: none;
   letter-spacing: 0.01em;
+  position: relative;
+  margin-right: 26px;
 }
 
 .logo-symbol {
@@ -41,12 +43,12 @@
 
 /* Center: search bar */
 .navbar-search {
-  flex: 1;
+  flex: 1 1 220px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 180px;
-  margin: 0 22px;
+  min-width: 140px;
+  margin: 0 14px 0 0;
 }
 
 .navbar-search-input {
@@ -76,13 +78,34 @@
   letter-spacing: 1.2px;
 }
 
-/* Actions (right) */
-.navbar-actions {
+/* Favorites (Liked Parts) Section */
+.navbar-favorites {
   display: flex;
   align-items: center;
-  gap: 18px;
-  min-width: 112px;
-  justify-content: flex-end;
+  position: relative;
+  margin: 0 10px;
+}
+.navbar-favorites:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -12px;
+  top: 8px;
+  height: 32px;
+  width: 1.5px;
+  background: rgba(240,240,240,0.07);
+  border-radius: 2px;
+}
+.navbar-favorites:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -12px;
+  top: 8px;
+  height: 32px;
+  width: 1.5px;
+  background: rgba(240,240,240,0.07);
+  border-radius: 2px;
 }
 
 .navbar-icon-btn {
@@ -109,54 +132,101 @@
   outline: 2px solid var(--kavia-orange, #E87A41);
 }
 
-@media (max-width: 786px) {
-  .navbar-ap-nav {
-    padding: 0 10px;
-  }
-  .navbar-section.navbar-search {
-    margin: 0 8px;
-  }
+/* Actions (right) */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 112px;
+  justify-content: flex-end;
+  margin-left: 18px;
+  position: relative;
+}
+.navbar-actions:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -13px;
+  top: 8px;
+  height: 32px;
+  width: 1.5px;
+  background: rgba(240,240,240,0.07);
+  border-radius: 2px;
+}
+
+
+@media (max-width: 1040px) {
   .navbar-search-input {
-    width: 160px;
+    width: 170px;
     font-size: 0.96rem;
-    padding: 8px 14px;
+    padding: 8px 10px;
   }
   .navbar-logo {
     font-size: 1.1rem;
     gap: 8px;
     min-width: 0;
   }
+  .navbar-section {
+    min-width: unset;
+  }
+}
+
+@media (max-width: 786px) {
+  .navbar-ap-nav {
+    padding: 0 8px;
+  }
+  .navbar-section.navbar-search {
+    margin: 0 4px 0 0;
+  }
+  .navbar-search-input {
+    width: 110px;
+    font-size: 0.90rem;
+    padding: 7px 8px;
+  }
+  .navbar-logo {
+    font-size: 1rem;
+    gap: 5px;
+    min-width: 0;
+  }
+  .navbar-favorites:before, .navbar-favorites:after {
+    height: 25px;
+    left: -7px;
+    right: -7px;
+    top: 8px;
+  }
+  .navbar-actions:before {
+    left: -7px;
+    height: 25px;
+    top: 8px;
+  }
 }
 
 /* Ensure strong visual division of sections */
-.navbar-logo, .navbar-search, .navbar-actions {
+.navbar-logo,
+.navbar-search,
+.navbar-favorites,
+.navbar-actions {
   position: relative;
 }
 
-.navbar-logo:after,
-.navbar-actions:before {
+.navbar-logo:after {
   content: "";
   display: block;
   position: absolute;
-  height: 36px;
+  right: -16px;
+  top: 8px;
+  height: 32px;
   width: 1.5px;
-  top: 14px;
   background: rgba(240,240,240,0.07);
   border-radius: 2px;
-}
-
-.navbar-logo:after {
-  right: -13px;
-}
-
-.navbar-actions:before {
-  left: -9px;
 }
 
 /* Remove vertical dividers on very small screens */
 @media (max-width: 600px) {
   .navbar-logo:after,
-  .navbar-actions:before {
+  .navbar-actions:before,
+  .navbar-favorites:before,
+  .navbar-favorites:after {
     display: none;
   }
 }
