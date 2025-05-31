@@ -10,6 +10,8 @@ import {
   useLocation
 } from 'react-router-dom';
 
+import React from 'react';
+import './App.css';
 import Navbar from './components/Navbar';
 import SidebarFilters from './components/SidebarFilters';
 import ProductGrid from './components/ProductGrid';
@@ -18,7 +20,6 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import OrderTracking from './components/OrderTracking';
 import UserAccount from './components/UserAccount';
-
 import {
   BrowserRouter as Router,
   Routes,
