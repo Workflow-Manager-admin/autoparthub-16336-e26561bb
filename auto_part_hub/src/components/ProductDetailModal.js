@@ -1,4 +1,4 @@
-rimport React from "react";
+import React from "react";
 
 /**
  * PUBLIC_INTERFACE
@@ -112,7 +112,6 @@ const ProductDetailModal = ({ isOpen, onClose, product }) => {
           <span style={{ fontWeight: 600, color: "#BDBDBD", fontSize: 15 }}>Category:&nbsp;</span>
           <span style={{ color: "#bbb", fontSize: 14 }}>{product.category}</span>
         </div>
-
         {/* Modal Actions */}
         <button className="btn" onClick={onClose} style={{ marginTop: 24 }}>Close</button>
       </div>
