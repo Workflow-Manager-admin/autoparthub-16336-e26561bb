@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
  * PUBLIC_INTERFACE
  * ProductGrid component displays a grid of ProductCards.
  */
-const ProductGrid = () => {
+const ProductGrid = ({ onProductView, navigate }) => {
   // Placeholder: Sample product list
   const sampleProducts = [
     { id: 1, name: "Brake Pads", price: 40, image: "" },
@@ -16,7 +16,12 @@ const ProductGrid = () => {
   return (
     <section className="product-grid" style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "24px", padding: "24px" }}>
       {sampleProducts.map(product => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          onView={onProductView}
+          navigate={navigate}
+        />
       ))}
     </section>
   );
