@@ -8,6 +8,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import OrderTracking from './components/OrderTracking';
 import UserAccount from './components/UserAccount';
+import CustomerReviews from './components/CustomerReviews';
 import {
   BrowserRouter as Router,
   Routes,
@@ -58,10 +59,14 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <ProductGrid
-                    onProductView={handleProductView}
-                    navigate={navigate}
-                  />
+                  <>
+                    <ProductGrid
+                      onProductView={handleProductView}
+                      navigate={navigate}
+                    />
+                    {/* CustomerReviews section appears below the grid, home page only */}
+                    <CustomerReviews />
+                  </>
                 }
               />
               {/* Modal page "overlay": /product/:id */}
