@@ -5,11 +5,15 @@ import React from "react";
  * Navbar component for AutoPartHub.
  * Fixed at the top; includes logo, search bar, user/account icon, and cart access.
  */
-const Navbar = () => {
+const Navbar = ({ navigate }) => {
   return (
     <nav className="navbar">
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-        <div className="logo">
+        <div
+          className="logo"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate && navigate("/")}
+        >
           <span className="logo-symbol">*</span> AutoPartHub
         </div>
         <input type="text" className="navbar-search" placeholder="Search parts..." style={{
@@ -22,8 +26,20 @@ const Navbar = () => {
           color: "#fff"
         }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <button className="btn" title="Cart"><span role="img" aria-label="cart">🛒</span></button>
-          <button className="btn" title="Account"><span role="img" aria-label="account">👤</span></button>
+          <button
+            className="btn"
+            title="Cart"
+            onClick={() => navigate && navigate("/cart")}
+          >
+            <span role="img" aria-label="cart">🛒</span>
+          </button>
+          <button
+            className="btn"
+            title="Account"
+            onClick={() => navigate && navigate("/account")}
+          >
+            <span role="img" aria-label="account">👤</span>
+          </button>
         </div>
       </div>
     </nav>
