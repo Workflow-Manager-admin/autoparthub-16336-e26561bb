@@ -96,7 +96,18 @@ const CustomerReviews = () => {
                 {review.name}
               </div>
               <div style={{ fontSize: "0.97rem", color: "#bdbdbd", marginRight: 10 }}>
-                {new Date(review.date).toLocaleDateString()}
+                {
+                  (() => {
+                    try {
+                      const d = new Date(review.date);
+                      // Check for invalid date
+                      if (isNaN(d.getTime())) return "-";
+                      return d.toLocaleDateString();
+                    } catch (e) {
+                      return "-";
+                    }
+                  })()
+                }
               </div>
               <div style={{ marginLeft: "auto" }}>
                 {Array.from({ length: 5 }).map((_, i) => star(i < review.rating))}
