@@ -102,3 +102,6 @@ src/components/ProductGrid.js
   Line 1:7:  Parsing error: Missing semicolon. (1:7)
 
 webpack compiled with 2 errors
+Compiling...
+Compiled successfully!
+webpack compiled successfully
