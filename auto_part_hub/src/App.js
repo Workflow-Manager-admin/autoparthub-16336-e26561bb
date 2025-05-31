@@ -18,6 +18,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import OrderTracking from './components/OrderTracking';
 import UserAccount from './components/UserAccount';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * PUBLIC_INTERFACE
@@ -27,6 +28,15 @@ function App() {
   // Modal state for product detail modal (used only on catalog route)
   const [modalProduct, setModalProduct] = React.useState(null);
 
+  // Routing hook for navigation (provided to Navbar and other components)
+  const [navigate, setNavigate] = React.useState(null);
+  // We set navigate when the Router is mounted, because useNavigate must be used inside Router
+  const NavigationBinder = () => {
+    const nav = useNavigate();
+    React.useEffect(() => setNavigate(() => nav), [nav]);
+    return null;
+  };
+
   // Product grid "view" handler for modal open
   const handleProductView = (product) => setModalProduct(product);
   const handleModalClose = () => setModalProduct(null);
@@ -34,8 +44,9 @@ function App() {
   // Main layout container
   return (
     <Router>
+      <NavigationBinder />
       <div className="app" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <Navbar/>
+        <Navbar navigate={navigate}/>
         {/* Main content area below navbar */}
         <div style={{
           display: "flex",
@@ -53,6 +64,7 @@ function App() {
                 element={
                   <ProductGrid
                     onProductView={handleProductView}
+                    navigate={navigate}
                   />
                 }
               />
@@ -66,22 +78,22 @@ function App() {
               {/* Cart page */}
               <Route
                 path="/cart"
-                element={<Cart/>}
+                element={<Cart />}
               />
               {/* Checkout page */}
               <Route
                 path="/checkout"
-                element={<Checkout/>}
+                element={<Checkout />}
               />
               {/* Orders/Order Tracking */}
               <Route
                 path="/orders"
-                element={<OrderTracking/>}
+                element={<OrderTracking />}
               />
               {/* User account/profile */}
               <Route
                 path="/account"
-                element={<UserAccount/>}
+                element={<UserAccount />}
               />
             </Routes>
           </main>
@@ -104,12 +116,13 @@ function App() {
  */
 function ProductDetailPage() {
   const location = useLocation();
-  // For demo, show modal in-page; in real app fetch product by id param.
+  // For demo, show modal in-page; in real app fetch product by id param (can parse id from location).
   return (
     <ProductDetailModal
       isOpen={true}
       product={null}
-      onClose={() => window.history.back()}
+      // Use navigate(-1) to go back in history; fallback to window.history if needed
+      onClose={() => (window.history.length > 1 ? window.history.back() : window.location.assign('/'))}
     />
   );
 }
