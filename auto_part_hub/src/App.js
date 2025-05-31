@@ -1,17 +1,5 @@
 import React from 'react';
 import './App.css';
-
-// Import react-router-dom and scaffolded components
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  useLocation
-} from 'react-router-dom';
-
-import React from 'react';
-import './App.css';
 import Navbar from './components/Navbar';
 import SidebarFilters from './components/SidebarFilters';
 import ProductGrid from './components/ProductGrid';
