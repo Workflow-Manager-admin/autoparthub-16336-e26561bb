@@ -18,7 +18,14 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import OrderTracking from './components/OrderTracking';
 import UserAccount from './components/UserAccount';
-import { useNavigate } from 'react-router-dom';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 
 /**
  * PUBLIC_INTERFACE
@@ -27,15 +34,14 @@ import { useNavigate } from 'react-router-dom';
 function App() {
   // Modal state for product detail modal (used only on catalog route)
   const [modalProduct, setModalProduct] = React.useState(null);
-
-  // Routing hook for navigation (provided to Navbar and other components)
   const [navigate, setNavigate] = React.useState(null);
-  // We set navigate when the Router is mounted, because useNavigate must be used inside Router
-  const NavigationBinder = () => {
+
+  // Binder to provide navigate once Router context is available
+  function NavigationBinder({ setNavigate }) {
     const nav = useNavigate();
-    React.useEffect(() => setNavigate(() => nav), [nav]);
+    React.useEffect(() => setNavigate(() => nav), [nav, setNavigate]);
     return null;
-  };
+  }
 
   // Product grid "view" handler for modal open
   const handleProductView = (product) => setModalProduct(product);
@@ -44,7 +50,8 @@ function App() {
   // Main layout container
   return (
     <Router>
-      <NavigationBinder />
+      {/* Provides navigate to the rest of the app through state */}
+      <NavigationBinder setNavigate={setNavigate} />
       <div className="app" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <Navbar navigate={navigate}/>
         {/* Main content area below navbar */}
